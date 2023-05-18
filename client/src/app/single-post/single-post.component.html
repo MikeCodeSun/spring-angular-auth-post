@@ -1,0 +1,40 @@
+<a class="col-md-8 mx-auto d-block mt-2" routerLink="..">back</a>
+<div [hidden]="!post" class="card col-md-8 mx-auto mt-3">
+  <div class="row">
+    <div class="col-md-5">
+      <img src="../../assets/user.jpeg" alt="user-img" class="" />
+    </div>
+    <div class="col-md-7">
+      <div class="card-title fs-3">@{{ post?.user?.username }}</div>
+      <p class="card-text fs-5">
+        {{ post?.content }}
+      </p>
+      <p class="card-text">
+        <small class="fs-6">{{ post?.createdAt }}</small>
+      </p>
+      <div [hidden]="!postBelong" class="btn-group">
+        <button class="btn btn-danger" (click)="deletePost()">delete</button>
+        <button class="btn btn-warning" (click)="openEdit()">edit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div [hidden]="post" class="text-center">No post Found</div>
+
+<div class="col-md-8 mx-auto mt-3" [hidden]="!isEdit">
+  <textarea
+    class="form-control"
+    rows="3"
+    [placeholder]="post?.content"
+    [(ngModel)]="content"
+    name="content"
+  ></textarea>
+  <div [hidden]="!editContentErrMsg" class="alert alert-danger">
+    {{ editContentErrMsg }}
+  </div>
+  <div class="btn-group">
+    <button class="btn btn-primary" (click)="updatePost()">save</button>
+    <button class="btn btn-danger" (click)="closeEdit()">cancel</button>
+  </div>
+</div>
